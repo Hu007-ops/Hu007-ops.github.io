@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<style>
+  @page { size: 286mm 1600mm; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px;
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: linear-gradient(180deg, #FFF8E7 0%, #FFEFD5 30%, #E8F5E9 70%, #E3F2FD 100%);
+    color: #2D2D2D;
+    padding: 50px 60px 60px;
+  }
+
+  /* 头部 */
+  .header {
+    text-align: center;
+    padding: 40px 30px 35px;
+    background: linear-gradient(135deg, #FF6B35 0%, #FF8C42 50%, #FFB347 100%);
+    border-radius: 24px;
+    color: white;
+    box-shadow: 0 8px 30px rgba(255,107,53,0.3);
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: "🌴";
+    position: absolute;
+    font-size: 80px;
+    top: 10px; left: 25px;
+    opacity: 0.3;
+  }
+  .header::after {
+    content: "🏖️";
+    position: absolute;
+    font-size: 70px;
+    bottom: 10px; right: 30px;
+    opacity: 0.3;
+  }
+  .header h1 {
+    font-size: 42px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+  .header .date {
+    font-size: 22px;
+    font-weight: 500;
+    opacity: 0.95;
+    margin-bottom: 18px;
+  }
+  .header .meta {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    font-size: 16px;
+  }
+  .header .meta span {
+    background: rgba(255,255,255,0.22);
+    padding: 6px 16px;
+    border-radius: 20px;
+    backdrop-filter: blur(4px);
+  }
+
+  /* 航班信息卡片 */
+  .flights {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    margin-top: 24px;
+  }
+  .flight-card {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    border-left: 5px solid #FF6B35;
+  }
+  .flight-card .flight-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #FF6B35;
+    margin-bottom: 10px;
+  }
+  .flight-card .flight-route {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: #1a1a1a;
+  }
+  .flight-card .flight-time {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.6;
+  }
+  .flight-card .flight-detail {
+    font-size: 12px;
+    color: #999;
+    margin-top: 8px;
+    line-height: 1.5;
+  }
+
+  /* 日期区块 */
+  .day-section {
+    margin-top: 32px;
+  }
+  .day-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 18px;
+  }
+  .day-badge {
+    background: linear-gradient(135deg, #00897B, #26A69A);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 30px;
+    font-size: 20px;
+    font-weight: 800;
+    box-shadow: 0 4px 12px rgba(0,137,123,0.3);
+    min-width: 160px;
+    text-align: center;
+  }
+  .day-city {
+    font-size: 18px;
+    color: #00897B;
+    font-weight: 600;
+  }
+  .day-hotel {
+    font-size: 14px;
+    color: #888;
+    margin-left: auto;
+    background: #E0F2F1;
+    padding: 6px 14px;
+    border-radius: 14px;
+  }
+
+  /* 时间线 */
+  .timeline {
+    position: relative;
+    padding-left: 30px;
+  }
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 8px;
+    top: 8px;
+    bottom: 8px;
+    width: 3px;
+    background: linear-gradient(180deg, #FF6B35, #FFB347, #26A69A);
+    border-radius: 2px;
+  }
+  .timeline-item {
+    position: relative;
+    margin-bottom: 14px;
+    background: white;
+    border-radius: 14px;
+    padding: 16px 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+  }
+  .timeline-item::before {
+    content: "";
+    position: absolute;
+    left: -27px;
+    top: 20px;
+    width: 13px;
+    height: 13px;
+    background: #FF6B35;
+    border: 3px solid white;
+    border-radius: 50%;
+    box-shadow: 0 0 0 2px #FF6B35;
+  }
+  .timeline-item.food::before { background: #FFB300; box-shadow: 0 0 0 2px #FFB300; }
+  .timeline-item.transport::before { background: #42A5F5; box-shadow: 0 0 0 2px #42A5F5; }
+  .timeline-item.hotel::before { background: #AB47BC; box-shadow: 0 0 0 2px #AB47BC; }
+  .timeline-item.activity::before { background: #66BB6A; box-shadow: 0 0 0 2px #66BB6A; }
+
+  .item-time {
+    display: inline-block;
+    font-size: 15px;
+    font-weight: 700;
+    color: #FF6B35;
+    background: #FFF3E0;
+    padding: 3px 12px;
+    border-radius: 10px;
+    margin-bottom: 6px;
+  }
+  .item-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 5px;
+  }
+  .item-desc {
+    font-size: 13px;
+    color: #666;
+    line-height: 1.6;
+  }
+  .item-tags {
+    margin-top: 8px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .tag {
+    font-size: 12px;
+    padding: 3px 10px;
+    border-radius: 8px;
+    background: #F5F5F5;
+    color: #777;
+  }
+  .tag.food { background: #FFF8E1; color: #F57F17; }
+  .tag.tip { background: #E3F2FD; color: #1565C0; }
+  .tag.cost { background: #F3E5F5; color: #7B1FA2; }
+
+  /* 底部 */
+  .footer {
+    margin-top: 40px;
+    text-align: center;
+    padding: 24px;
+    background: linear-gradient(135deg, #26A69A, #00897B);
+    border-radius: 16px;
+    color: white;
+  }
+  .footer .budget-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .footer .budget-items {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    flex-wrap: wrap;
+    font-size: 14px;
+  }
+  .footer .budget-items span {
+    background: rgba(255,255,255,0.18);
+    padding: 5px 14px;
+    border-radius: 12px;
+  }
+  .footer .total {
+    font-size: 28px;
+    font-weight: 800;
+    margin-top: 14px;
+  }
+
+  /* 必带物品 */
+  .packing-section {
+    margin-top: 32px;
+  }
+  .packing-title {
+    font-size: 24px;
+    font-weight: 800;
+    color: #FF6B35;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .packing-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+  }
+  .packing-card {
+    background: white;
+    border-radius: 14px;
+    padding: 16px 18px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+    border-top: 4px solid #FF6B35;
+  }
+  .packing-card.sun { border-top-color: #FFB300; }
+  .packing-card.cloth { border-top-color: #42A5F5; }
+  .packing-card.elec { border-top-color: #7E57C2; }
+  .packing-card.med { border-top-color: #EF5350; }
+  .packing-card.money { border-top-color: #26A69A; }
+  .packing-card.other { border-top-color: #8D6E63; }
+  .packing-card .cat-title {
+    font-size: 16px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  .packing-card ul {
+    list-style: none;
+    padding: 0;
+  }
+  .packing-card li {
+    font-size: 13px;
+    color: #555;
+    line-height: 1.7;
+    padding-left: 16px;
+    position: relative;
+  }
+  .packing-card li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #66BB6A;
+    font-weight: bold;
+  }
+  .packing-card li .note {
+    color: #999;
+    font-size: 11px;
+  }
+</style>
+</head>
+<body>
+
+<!-- 头部 -->
+<div class="header">
+  <h1>🇹🇭 泰国普吉岛+清迈 5天4晚自由行</h1>
+  <div class="date">📅 2026年9月2日 - 9月6日</div>
+  <div class="meta">
+    <span>👥 5人出行</span>
+    <span>💰 人均预算 7178元</span>
+    <span>🏨 普吉：阿诺娜日落精品酒店</span>
+    <span>🏨 清迈：POR Kotchasarn</span>
+  </div>
+</div>
+
+<!-- 航班信息 -->
+<div class="flights">
+  <div class="flight-card">
+    <div class="flight-title">✈️ 第1程 · 9月2日</div>
+    <div class="flight-route">长沙 → 普吉岛</div>
+    <div class="flight-time">00:05 CSX T2 → 08:20 HKT</div>
+    <div class="flight-detail">酷航 TR125 转 TR658<br>经停新加坡樟宜（中转2h50m）<br>空客321 → 空客320</div>
+  </div>
+  <div class="flight-card">
+    <div class="flight-title">✈️ 第2程 · 9月4日</div>
+    <div class="flight-route">普吉岛 → 清迈</div>
+    <div class="flight-time">13:40 HKT D → 15:50 CNX D</div>
+    <div class="flight-detail">泰国越捷航空 VZ417<br>飞行2h10m · 波音737<br>票价 533元</div>
+  </div>
+  <div class="flight-card">
+    <div class="flight-title">✈️ 第3程 · 9月6日</div>
+    <div class="flight-route">清迈 → 长沙</div>
+    <div class="flight-time">16:10 CNX → 23:10 CSX T2</div>
+    <div class="flight-detail">东航 MU9620 转 MU8412<br>经停昆明长水（中转2h5m）<br>实际乘坐上航 FM9480</div>
+  </div>
+</div>
+
+<!-- Day1 -->
+<div class="day-section">
+  <div class="day-header">
+    <div class="day-badge">Day 1 · 9/2 周三</div>
+    <div class="day-city">📍 普吉岛</div>
+    <div class="day-hotel">🏨 阿诺娜日落精品酒店（卡伦海滩）</div>
+  </div>
+  <div class="timeline">
+    <div class="timeline-item transport">
+      <div class="item-time">00:05 - 08:20</div>
+      <div class="item-title">✈️ 长沙黄花机场 → 普吉岛国际机场</div>
+      <div class="item-desc">经停新加坡樟宜机场，酷航TR125转TR658，全程约8h15m</div>
+      <div class="item-tags"><span class="tag tip">提前2h到机场</span><span class="tag tip">带颈枕和拖鞋</span><span class="tag food">无餐食，包里备点充饥的</span></div>
+    </div>
+    <div class="timeline-item transport">
+      <div class="item-time">08:30 - 09:30</div>
+      <div class="item-title">🚗 机场 → 酒店（约43km，车程1h）</div>
+      <div class="item-desc">预约接机或Grab打车，约500-800泰铢；早到可先寄存行李</div>
+    </div>
+    <div class="timeline-item activity">
+      <div class="item-time">10:30 - 12:00</div>
+      <div class="item-title">🏖️ 卡伦海滩漫步、踩水、拍照</div>
+      <div class="item-desc">酒店距海滩约0.7km，步行可达；9月雨季末注意防晒和突然降雨</div>
+    </div>
+    <div class="timeline-item food">
+      <div class="item-time">12:00 - 13:30</div>
+      <div class="item-title">🍽️ 午餐：165 Family Seafood</div>
+      <div class="item-desc">卡塔海滩附近，普吉No.1餐厅；推荐黄咖喱蟹、烤海鲈鱼、菠萝炒饭</div>
+      <div class="item-tags"><span class="tag cost">人均300-500泰铢</span></div>
+    </div>
+    <div class="timeline-item activity">
+      <div class="item-time">14:00 - 16:30</div>
+      <div class="item-title">🌴 卡塔海滩 + 卡伦观景台</div>
+      <div class="item-desc">俯瞰三大海滩，观景台免费，拍照绝佳位置；打车/双条车约15min</div>
+    </div>
+    <div class="timeline-item activity">
+      <div class="item-time">17:00 - 18:30</div>
+      <div class="item-title">🌅 神仙半岛 Promthep Cape 看日落</div>
+      <div class="item-desc">普吉岛最美日落点，建议17:00前到达占位置</div>
+    </div>
+    <div class="timeline-item food">
+      <div class="item-time">19:00 - 21:00</div>
+      <div class="item-title">🦐 芭东班赞海鲜市场 + 江西冷夜市</div>
+      <div class="item-desc">班赞一楼买海鲜二楼加工，芒果糯米饭、烤鱿鱼、泰式奶茶、椰子冻</div>
+      <div class="item-tags"><span class="tag tip">海鲜一定要砍价！先问总价再砍</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- Day2 -->
+<div class="day-section">
+  <div class="day-header">
+    <div class="day-badge">Day 2 · 9/3 周四</div>
+    <div class="day-city">📍 普吉岛</div>
+    <div class="day-hotel">🏨 阿诺娜日落精品酒店</div>
+  </div>
+  <div class="timeline">
+    <div class="timeline-item hotel">
+      <div class="item-time">07:00 - 08:00</div>
+      <div class="item-title">☕ 酒店早餐，出海接车准备</div>
+      <div class="item-desc">穿泳衣+防晒衣，带毛巾、防水手机袋、晕船药</div>
+    </div>
+    <div class="timeline-item transport">
+      <div class="item-time">08:00 - 08:30</div>
+      <div class="item-title">🚌 酒店 → 查龙码头</div>
+      <div class="item-desc">一日游专车接送；提前在Klook/携程预订皇帝岛+珊瑚岛一日游</div>
+    </div>
+    <div class="timeline-item activity">
+      <div class="item-time">08:30 - 17:00</div>
+      <div class="item-title">🚤 皇帝岛 + 珊瑚岛出海一日游</div>
+      <div class="item-desc">浮潜、海钓、拖曳伞、白沙滩拍照；含午餐、浮潜装备、接送</div>
+      <div class="item-tags"><span class="tag cost">约400-500元/人</span><span class="tag tip">拖曳伞额外付费约1500泰铢</span></div>
+    </div>
+    <div class="timeline-item hotel">
+      <div class="item-time">17:00 - 18:00</div>
+      <div class="item-title">🛁 返回酒店洗漱休整</div>
+      <div class="item-desc">出海后容易晒伤，回酒店及时补涂芦荟胶</div>
+    </div>
+    <div class="timeline-item food">
+      <div class="item-time">18:30 - 20:00</div>
+      <div class="item-title">🍽️ 晚餐：卡伦海滩海景餐厅</div>
+      <div class="item-desc">Kan Eang@Pier 或本地海鲜餐厅，推荐椒盐皮皮虾、咖喱蟹、冬阴功汤</div>
+      <div class="item-tags"><span class="tag cost">人均500-800泰铢</span><span class="tag tip">建议提前订位</span></div>
+    </div>
+    <div class="timeline-item activity">
+      <div class="item-time">20:00 - 22:00</div>
+      <div class="item-title">🍻 芭东酒吧街 / 江西冷购物中心</div>
+      <div class="item-desc">路边芒果糯米饭、香蕉煎饼、泰式奶茶；酒吧街注意安全</div>
+    </div>
+  </div>
+</div>
+
+<!-- Day3 -->
+<div class="day-section">
+  <div class="day-header">
+    <div class="day-badge">Day 3 · 9/4 周五</div>
+    <div class="day-city">📍 普吉岛 → 清迈</div>
+    <div class="day-hotel">🏨 POR Kotchasarn（清迈）</div>
+  </div>
+  <div class="timeline">
+    <div class="timeline-item hotel">
+      <div class="item-time">08:00 - 09:00</div>
+      <div class="item-title">☕ 酒店早餐，退房寄存行李</div>
+      <div class="item-desc">退房后行李可寄存在酒店</div>
+    </div>
+    <div class="timeline-item activity">
+      <div class="item-time">09:00 - 11:00</div>
+      <div class="item-title">🏛️ 普吉镇老城漫步 + 查龙寺</div>
+      <div class="item-desc">彩色骑楼、涂鸦墙；查龙寺是普吉最大佛教寺院，免费参观，需着长裤/长裙</div>
+    </div>
+    <div class="timeline-item food">
+      <div class="item-time">11:00 - 12:30</div>
+      <div class="item-title">🍽️ 午餐：Tu Kab Khao Restaurant</div>
+      <div class="item-desc">普吉镇米其林推荐，泰式红烧肉、炒蟹肉、芒果饭、茶汤米线</div>
+      <div class="item-tags"><span class="tag cost">人均400-600泰铢</span><span class="tag tip">建议提前预约</span></div>
+    </div>
+    <div class="timeline-item transport">
+      <div class="item-time">12:30 - 13:00</div>
+      <div class="item-title">🚗 前往普吉国际机场</div>
+      <div class="item-desc">打车约40min，约500泰铢；国内航班建议提前1.5h到机场</div>
+    </div>
+    <div class="timeline-item transport">
+      <div class="item-time">13:40 - 15:50</div>
+      <div class="item-title">✈️ 普吉岛 → 清迈</div>
+      <div class="item-desc">泰国越捷航空VZ417，波音737，飞行2h10m；清迈比普吉凉快约5度</div>
+    </div>
+    <div class="timeline-item transport">
+      <div class="item-time">16:00 - 17:00</div>
+      <div class="item-title">🚗 清迈机场 → 酒店（约4km，15min）</div>
+      <div class="item-desc">Grab打车约100-150泰铢；清迈机场很小，出闸快</div>
+    </div>
+    <div class="timeline-item activity">
+      <div class="item-time">17:30 - 19:00</div>
+      <div class="item-title">🏰 塔佩门 + 古城漫步</div>
+      <div class="item-desc">喂鸽子、拍古城墙；塔佩门免费，避开强行收费喂鸽小贩</div>
+    </div>
+    <div class="timeline-item food">
+      <div class="item-time">19:00 - 21:30</div>
+      <div class="item-title">🏮 长康路夜市（清迈最大每晚开放夜市）</div>
+      <div class="item-desc">凤飞飞猪脚饭、芒果糯米饭、泰北香肠、烤鸡、椰子冰淇淋、鲜榨果汁</div>
+      <div class="item-tags"><span class="tag tip">凤飞飞在昌卜克门夜市，17:00后出摊，人均50泰铢</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- Day4 -->
+<div class="day-section">
+  <div class="day-header">
+    <div class="day-badge">Day 4 · 9/5 周六</div>
+    <div class="day-city">📍 清迈</div>
+    <div class="day-hotel">🏨 POR Kotchasarn</div>
+  </div>
+  <div class="timeline">
+    <div class="timeline-item hotel">
+      <div class="item-time">08:00 - 09:00</div>
+      <div class="item-title">☕ 酒店早餐</div>
+      <div class="item-desc">穿舒适衣物，大象营会弄脏衣服</div>
+    </div>
+    <div class="timeline-item activity">
+      <div class="item-time">09:00 - 12:00</div>
+      <div class="item-title">🐘 大象自然保护营</div>
+      <div class="item-desc">喂食、洗澡、学习大象保护知识，不骑乘；推荐Elephant Nature Park或同类保护营</div>
+      <div class="item-tags"><span class="tag cost">约300-400元/人</span><span class="tag tip">含酒店接送+午餐</span></div>
+    </div>
+    <div class="timeline-item food">
+      <div class="item-time">12:00 - 13:30</div>
+      <div class="item-title">🍽️ 午餐：Huen Muan Jai（泰北菜名店）</div>
+      <div class="item-desc">泰北咖喱鸡面、烤鸡、糯米饭、青木瓜沙拉、炸猪皮；本地人常去，需排队</div>
+      <div class="item-tags"><span class="tag cost">人均200-400泰铢</span></div>
+    </div>
+    <div class="timeline-item activity">
+      <div class="item-time">14:00 - 16:30</div>
+      <div class="item-title">💆 找个店泰式按摩</div>
+      <div class="item-desc">2h泰式按摩，放松身心；清迈按摩店遍布古城和宁曼路</div>
+      <div class="item-tags"><span class="tag cost">人均约150-200泰铢</span></div>
+    </div>
+    <div class="timeline-item activity">
+      <div class="item-time">17:00 - 19:00</div>
+      <div class="item-title">☕ 宁曼路漫步 + 网红咖啡打卡 + One Nimman</div>
+      <div class="item-desc">Ristr8to咖啡、Mango Tango芒果甜品；清迈文艺中心，每家咖啡馆都很有特色</div>
+    </div>
+    <div class="timeline-item food">
+      <div class="item-time">19:00 - 21:00</div>
+      <div class="item-title">🍜 宁曼路/玛雅购物中心附近晚餐+小吃</div>
+      <div class="item-desc">泰北烤肠、猪脚饭、芒果糯米饭、香蕉煎饼、泰式奶茶；玛雅百货B1层美食广场性价比高</div>
+    </div>
+  </div>
+</div>
+
+<!-- Day5 -->
+<div class="day-section">
+  <div class="day-header">
+    <div class="day-badge">Day 5 · 9/6 周日</div>
+    <div class="day-city">📍 清迈 → 长沙</div>
+    <div class="day-hotel">✈️ 当晚航班返程</div>
+  </div>
+  <div class="timeline">
+    <div class="timeline-item hotel">
+      <div class="item-time">08:00 - 09:00</div>
+      <div class="item-title">☕ 酒店早餐，退房寄存行李</div>
+      <div class="item-desc">退房后行李寄存酒店，下午来取</div>
+    </div>
+    <div class="timeline-item activity">
+      <div class="item-time">09:00 - 11:30</div>
+      <div class="item-title">🛕 古城寺庙巡礼</div>
+      <div class="item-desc">契迪龙寺（40泰铢）→ 帕辛寺（20泰铢）→ 清曼寺（免费）；均需长裤/长裙</div>
+    </div>
+    <div class="timeline-item food">
+      <div class="item-time">11:30 - 13:00</div>
+      <div class="item-title">🍽️ 午餐：Khao Soi Khun Yai（泰北咖喱面名店）</div>
+      <div class="item-desc">泰北咖喱面（鸡肉/牛肉），配腌芥菜和青柠；搭配凤飞飞猪脚饭</div>
+      <div class="item-tags"><span class="tag cost">人均50-80泰铢</span><span class="tag tip">10:00-14:00营业，售完即止</span></div>
+    </div>
+    <div class="timeline-item activity">
+      <div class="item-time">13:00 - 14:30</div>
+      <div class="item-title">🛍️ 瓦洛洛市场采购手信</div>
+      <div class="item-desc">干果、香料、香皂、零食；推荐榴莲干、芒果干、青木瓜沙拉调料、手工皂</div>
+    </div>
+    <div class="timeline-item transport">
+      <div class="item-time">14:30 - 15:00</div>
+      <div class="item-title">🚗 取行李 → 清迈机场</div>
+      <div class="item-desc">打车约15min，约100-150泰铢；国际航班建议提前2h到机场</div>
+    </div>
+    <div class="timeline-item transport">
+      <div class="item-time">16:10 - 23:10</div>
+      <div class="item-title">✈️ 清迈 → 长沙（经停昆明）</div>
+      <div class="item-desc">东航MU9620转MU8412（实际乘坐上航FM9480），经停昆明长水中转2h5m</div>
+      <div class="item-tags"><span class="tag tip">到达长沙约23:10，提前安排接机/打车</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- 底部预算 -->
+<div class="footer">
+  <div class="budget-title">💰 人均预算明细</div>
+  <div class="budget-items">
+    <span>✈️ 机票 3059</span>
+    <span>🏨 住宿 969</span>
+    <span>🍽️ 餐饮 1000</span>
+    <span>🚤 出海 450</span>
+    <span>🐘 活动 400</span>
+    <span>🚗 交通 300</span>
+    <span>🛍️ 购物 500</span>
+    <span>💵 备用 500</span>
+  </div>
+  <div class="total">人均合计 ¥7,178 · 5人共 ¥35,890</div>
+</div>
+
+<!-- 必带物品清单 -->
+<div class="packing-section">
+  <div class="packing-title">🎒 出国必带物品清单</div>
+  <div class="packing-grid">
+    <div class="packing-card">
+      <div class="cat-title">📄 证件类</div>
+      <ul>
+        <li>护照 <span class="note">有效期6个月以上，复印2份</span></li>
+        <li>机票酒店行程单 <span class="note">打印英文版，入境可能查验</span></li>
+        <li>身份证 <span class="note">国内段乘机使用</span></li>
+        <li>旅游保险单 <span class="note">建议购买境外旅游意外险</span></li>
+      </ul>
+    </div>
+    <div class="packing-card sun">
+      <div class="cat-title">☀️ 防晒类</div>
+      <ul>
+        <li>防晒霜(SPF50+) <span class="note">紫外线极强，需频繁补涂</span></li>
+        <li>墨镜+遮阳帽 <span class="note">出海和海滩必备</span></li>
+        <li>防晒衣/薄外套 <span class="note">防晒+空调房保暖</span></li>
+      </ul>
+    </div>
+    <div class="packing-card cloth">
+      <div class="cat-title">👕 衣物类</div>
+      <ul>
+        <li>泳衣(2套) <span class="note">出海换洗方便</span></li>
+        <li>浮潜袜/沙滩鞋 <span class="note">防珊瑚/礁石划伤</span></li>
+        <li>长裤/长裙 <span class="note">进寺庙必须遮盖膝盖肩膀</span></li>
+        <li>舒适拖鞋 <span class="note">日常出行+洗澡</span></li>
+      </ul>
+    </div>
+    <div class="packing-card elec">
+      <div class="cat-title">🔌 电子类</div>
+      <ul>
+        <li>转换插头 <span class="note">两孔通用，三孔需转换头</span></li>
+        <li>充电宝(≤100Wh) <span class="note">可随身带，不可托运</span></li>
+        <li>手机防水袋 <span class="note">出海浮潜保护手机</span></li>
+        <li>耳机+充电线 <span class="note">长途飞行使用</span></li>
+      </ul>
+    </div>
+    <div class="packing-card med">
+      <div class="cat-title">💊 药品类</div>
+      <ul>
+        <li>肠胃药/止泻药 <span class="note">饮食不适应急</span></li>
+        <li>晕车/晕船药 <span class="note">出海前30分钟服用</span></li>
+        <li>创可贴+碘伏 <span class="note">轻微外伤处理</span></li>
+        <li>感冒药+退烧药 <span class="note">空调房容易着凉</span></li>
+      </ul>
+    </div>
+    <div class="packing-card money">
+      <div class="cat-title">💵 财务类</div>
+      <ul>
+        <li>泰铢现金 <span class="note">建议兑换5000-10000泰铢/人</span></li>
+        <li>信用卡/银联卡 <span class="note">大商场和酒店可刷卡</span></li>
+        <li>手机支付 <span class="note">支付宝/微信部分商家可用</span></li>
+      </ul>
+    </div>
+    <div class="packing-card other">
+      <div class="cat-title">📦 其他</div>
+      <ul>
+        <li>雨伞/雨衣 <span class="note">9月雨季末，偶有阵雨</span></li>
+        <li>洗漱用品 <span class="note">洗脸巾、牙刷牙膏自己带</span></li>
+        <li>塑料袋/密封袋 <span class="note">装湿衣服、手机防水</span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
