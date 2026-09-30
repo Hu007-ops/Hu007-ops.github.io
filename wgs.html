@@ -6,307 +6,216 @@
 <title>武功山 2 天 1 夜登山时间线（纯徒步 522 / 索道 662）</title>
 <style>
   :root{
-    --text:#1A1B1C; --sec:#5B6470; --bg:#F5F4F0;
-    --card:#FFFFFF; --border:#E8E6DF; --line:#DAD8D0;
-    --blue:#2563A8; --blue-2:#3E7BBD; --blue-bg:#EEF4FB;
-    --green:#2E7D5B; --green-2:#4C9A75; --green-bg:#EDF7F1;
-    --gold:#C08A2D; --gold-bg:#FBF1DD;
-    --ink:#24282E;
+    --text:#1A1B1C; --sec:#5B6470; --bg:#F4F3EE; --card:#FFFFFF;
+    --border:#E4E3DD; --line:#D8D5CC;
+    --blue:#2B6CB0; --blue-bg:#EEF4FB; --green:#2F855A; --green-bg:#EDF7F1;
+    --yellow:#B7791F; --yellow-bg:#FDF3E2; --gray:#6B7280; --gray-bg:#F2F2F0;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   body{background:var(--bg);color:var(--text);
     font-family:'Roboto','PingFang SC','Segoe UI','Microsoft YaHei',Arial,sans-serif;
-    line-height:1.6;padding:0 0 40px;}
-  .wrap{max-width:900px;margin:0 auto;padding:0 16px;}
-
-  /* ===== Hero ===== */
-  .hero{position:relative;overflow:hidden;border-radius:0 0 28px 28px;
-    background:linear-gradient(135deg,#17324F 0%,#1F4E6E 45%,#2E7D5B 100%);
-    color:#fff;padding:42px 28px 88px;margin:0 -16px;}
-  .hero .stars{position:absolute;inset:0;opacity:.5;pointer-events:none;}
-  .hero .sun{position:absolute;right:34px;top:26px;width:64px;height:64px;border-radius:50%;
-    background:radial-gradient(circle at 35% 35%,#FFE8B0,#F5C56B 60%,rgba(245,197,107,0));opacity:.85;}
-  .hero .mountain{position:absolute;left:0;right:0;bottom:0;width:100%;height:150px;}
-  .hero .tagline{display:inline-flex;align-items:center;gap:6px;font-size:12px;letter-spacing:.12em;
-    background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);
-    padding:5px 12px;border-radius:999px;backdrop-filter:blur(4px);}
-  .hero h1{font-size:26px;font-weight:700;margin:14px 0 6px;letter-spacing:.01em;}
-  .hero .sub{font-size:14px;color:rgba(255,255,255,.82);}
-  .hero .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;position:relative;z-index:2;}
-  .hero .chip{font-size:12px;padding:6px 12px;border-radius:10px;
-    background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.22);color:#fff;}
-  .hero .chip b{font-weight:600;}
-
-  /* ===== 区块 ===== */
-  section{margin-top:26px;}
-  .sec-head{display:flex;align-items:center;gap:10px;margin-bottom:4px;}
-  .sec-no{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;
-    border-radius:9px;background:var(--ink);color:#fff;font-size:13px;font-weight:700;}
-  .sec-title{font-size:17px;font-weight:700;}
-  .sec-hint{color:var(--sec);font-size:12.5px;margin:2px 0 12px 38px;}
-
-  /* ===== 共享流程横条 ===== */
-  .flow{display:flex;flex-wrap:wrap;gap:8px;background:var(--card);
-    border:1px solid var(--border);border-radius:16px;padding:14px;box-shadow:0 1px 3px rgba(0,0,0,.05);}
-  .flow .node{flex:1 1 150px;background:var(--bg);border:1px solid var(--border);
-    border-radius:12px;padding:10px 12px;font-size:12.5px;position:relative;}
-  .flow .node .t{font-weight:700;font-size:12px;color:var(--ink);
-    display:inline-block;padding:2px 8px;border-radius:7px;background:#fff;
-    border:1px solid var(--border);margin-bottom:6px;}
-  .flow .node .d{color:var(--sec);}
-  .flow .node b{color:var(--text);font-weight:600;}
-  .flow .arrow{align-self:center;color:#A9A69C;font-size:16px;flex:0 0 auto;font-weight:600;}
-
-  /* ===== 双轨时间线 ===== */
-  .tracks{display:flex;flex-wrap:wrap;gap:14px;margin-top:14px;}
-  .track{flex:1 1 320px;border-radius:18px;background:var(--card);
-    border:1px solid var(--border);box-shadow:0 1px 3px rgba(0,0,0,.05);overflow:hidden;}
-  .track-head{padding:13px 16px;font-size:14.5px;font-weight:700;display:flex;
-    align-items:center;justify-content:space-between;gap:8px;}
-  .track.t-hike .track-head{background:linear-gradient(135deg,#2563A8,#3E7BBD);color:#fff;}
-  .track.t-cable .track-head{background:linear-gradient(135deg,#2E7D5B,#4C9A75);color:#fff;}
-  .track-head .tag{font-size:11.5px;font-weight:600;padding:3px 10px;border-radius:999px;
-    background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.35);}
-  .tl{position:relative;padding:14px 16px 6px;}
-  .tl .step{position:relative;padding:0 0 16px 26px;}
-  .tl .step:before{content:'';position:absolute;left:6px;top:5px;width:11px;height:11px;border-radius:50%;
-    border:2.5px solid #fff;box-shadow:0 0 0 2px currentColor;}
-  .tl .step:after{content:'';position:absolute;left:10.5px;top:20px;bottom:0;width:2px;
+    line-height:1.55;padding:24px 16px;}
+  .wrap{max-width:880px;margin:0 auto;}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:14px;
+    padding:16px 18px;margin:14px 0;}
+  h1{font-size:20px;font-weight:600;margin-bottom:4px;}
+  .sub{color:var(--sec);font-size:13.5px;}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;}
+  .chip{font-size:12px;padding:5px 10px;border-radius:999px;border:1px solid var(--border);
+    background:#fff;color:var(--text);}
+  .chip b{font-weight:600;}
+  h2{font-size:16px;font-weight:600;margin:18px 0 4px;display:flex;align-items:center;gap:6px;}
+  .hint{color:var(--sec);font-size:12.5px;margin-bottom:10px;}
+  /* 共享节奏横条 */
+  .flow{display:flex;flex-wrap:wrap;gap:6px;align-items:stretch;}
+  .flow .node{flex:1 1 130px;background:var(--gray-bg);border:1px solid var(--border);
+    border-radius:10px;padding:8px 10px;font-size:12.5px;position:relative;}
+  .flow .node .t{font-weight:600;font-size:12px;color:#3D4450;}
+  .flow .arrow{align-self:center;color:var(--sec);font-size:14px;flex:0 0 auto;}
+  /* 双轨时间线 */
+  .tracks{display:flex;flex-wrap:wrap;gap:12px;}
+  .track{flex:1 1 300px;border-radius:12px;border:1px solid var(--border);
+    background:#fff;overflow:hidden;}
+  .track-head{padding:10px 14px;font-size:14px;font-weight:600;display:flex;
+    justify-content:space-between;gap:8px;flex-wrap:wrap;}
+  .track-head .tag{font-size:11.5px;font-weight:400;padding:2px 8px;border-radius:999px;}
+  .track.t-hike .track-head{background:var(--blue-bg);color:var(--blue);}
+  .track.t-cable .track-head{background:var(--green-bg);color:var(--green);}
+  .track.t-hike .tag{background:var(--blue);color:#fff;}
+  .track.t-cable .tag{background:var(--green);color:#fff;}
+  .tl{position:relative;padding:10px 14px 12px;}
+  .tl .step{position:relative;padding:0 0 14px 20px;font-size:12.5px;}
+  .tl .step:before{content:'';position:absolute;left:5px;top:6px;width:8px;height:8px;
+    border-radius:50%;}
+  .tl .step:after{content:'';position:absolute;left:8px;top:16px;bottom:-2px;width:1.5px;
     background:var(--line);}
   .tl .step:last-child:after{display:none;}
-  .track.t-hike .tl .step{color:var(--blue);}
-  .track.t-cable .tl .step{color:var(--green);}
-  .tl .step .t{font-weight:700;font-size:12px;display:inline-block;padding:1px 8px;border-radius:7px;
-    background:currentColor;color:#fff;margin-bottom:3px;}
-  .tl .step .d{color:var(--sec);font-size:12.5px;}
-  .tl .step .d b{color:var(--text);font-weight:600;}
-
-  /* ===== 提醒条 ===== */
-  .tip{display:flex;gap:10px;align-items:flex-start;border-radius:14px;padding:12px 14px;
-    font-size:12.5px;margin-top:14px;line-height:1.6;}
-  .tip .ic{flex:0 0 auto;font-size:16px;}
-  .tip-y{background:var(--gold-bg);color:#7C5318;border:1px solid #EFDCAE;}
-  .tip-g{background:var(--green-bg);color:#276749;border:1px solid #C4E5D2;}
-  .tip-b{background:var(--blue-bg);color:#1D4E8F;border:1px solid #C7DDF2;}
-
-  /* ===== 费用 ===== */
-  .cost-grid{display:flex;flex-wrap:wrap;gap:14px;}
-  .cost-card{flex:1 1 260px;border-radius:18px;padding:16px 18px;position:relative;overflow:hidden;}
-  .cost-card .cap{font-size:12px;font-weight:600;letter-spacing:.06em;}
-  .cost-card .num{font-size:34px;font-weight:700;line-height:1.15;margin:2px 0 8px;}
-  .cost-card .sub-note{font-size:11.5px;opacity:.85;}
-  .cost-card.hike{background:linear-gradient(135deg,#EEF4FB,#DCE9F7);color:#1D4E8F;}
-  .cost-card.cable{background:linear-gradient(135deg,#EDF7F1,#D4ECDF);color:#1F6B4C;}
-  .cost-card .badge{position:absolute;top:14px;right:14px;font-size:11px;font-weight:600;
-    padding:3px 10px;border-radius:999px;background:rgba(255,255,255,.65);}
-  .bar-box{margin-top:16px;background:var(--card);border:1px solid var(--border);
-    border-radius:16px;padding:16px 18px;box-shadow:0 1px 3px rgba(0,0,0,.05);}
-  .bar-cap{font-size:12.5px;font-weight:700;color:var(--ink);margin:0 0 8px;display:flex;
-    justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap;}
-  .bar-cap .sum{font-weight:400;color:var(--sec);font-size:12px;}
-  .bar{display:flex;height:40px;border-radius:11px;overflow:hidden;margin:0 0 6px;
-    border:1px solid rgba(0,0,0,.06);box-shadow:inset 0 1px 0 rgba(255,255,255,.6);}
-  .bar .seg{display:flex;flex-direction:column;align-items:center;justify-content:center;
-    color:#fff;font-size:10.5px;line-height:1.25;white-space:nowrap;overflow:hidden;min-width:0;}
-  .bar .seg .v{font-weight:700;}
-  .bar .seg .l{opacity:.88;font-weight:400;}
-  .legend{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:10px;font-size:12px;color:var(--sec);}
-  .legend .li{display:flex;align-items:center;gap:6px;}
+  .tl .step .t{font-weight:600;font-size:12px;}
+  .tl .step .d{color:var(--sec);}
+  .track.t-hike .tl .step:before{background:var(--blue);}
+  .track.t-cable .tl .step:before{background:var(--green);}
+  .tl .step b{font-weight:600;}
+  /* 成本条 */
+  .bar{display:flex;height:34px;border-radius:8px;overflow:hidden;margin:6px 0 2px;
+    border:1px solid var(--border);}
+  .bar .seg{display:flex;align-items:center;justify-content:center;font-size:10.5px;
+    color:#fff;white-space:nowrap;overflow:hidden;min-width:0;}
+  .bar .seg small{font-weight:400;opacity:.92;}
+  .bar-cap{font-size:12px;color:var(--sec);margin:8px 0 2px;font-weight:600;}
+  .legend{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:8px;font-size:12px;}
+  .legend .li{display:flex;align-items:center;gap:5px;}
   .legend .sw{width:10px;height:10px;border-radius:3px;display:inline-block;}
-
-  /* ===== 提示卡 ===== */
-  .tips-grid{display:flex;flex-wrap:wrap;gap:14px;}
-  .tip-card{flex:1 1 260px;border-radius:18px;background:var(--card);
-    border:1px solid var(--border);padding:16px 18px;box-shadow:0 1px 3px rgba(0,0,0,.05);}
-  .tip-card .ic{font-size:20px;margin-bottom:8px;display:block;}
-  .tip-card h3{font-size:14px;font-weight:700;margin-bottom:5px;}
-  .tip-card p{font-size:12.5px;color:var(--sec);}
-  .tip-card p b{color:var(--text);}
-
-  .foot{margin-top:22px;color:var(--sec);font-size:11.5px;line-height:1.7;padding:0 4px;}
-
+  .total-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:12px;}
+  .total-box{flex:1 1 220px;border-radius:12px;padding:12px 14px;}
+  .total-box .num{font-size:24px;font-weight:600;margin-top:2px;}
+  .total-box .cap{font-size:12px;color:var(--sec);}
+  .box-hike{background:var(--blue-bg);} .box-hike .num{color:var(--blue);}
+  .box-cable{background:var(--green-bg);} .box-cable .num{color:var(--green);}
+  .note{font-size:12px;color:var(--sec);margin-top:8px;}
+  /* 提示条 */
+  .tip{display:flex;gap:8px;align-items:flex-start;border-radius:12px;padding:10px 12px;
+    font-size:12.5px;margin-top:10px;}
+  .tip .ic{flex:0 0 auto;}
+  .tip-y{background:var(--yellow-bg);color:#7C5318;border:1px solid #EFD9AE;}
+  .tip-g{background:var(--green-bg);color:#276749;border:1px solid #BFE3CD;}
+  .tip-gr{background:var(--gray-bg);color:#4B5563;border:1px solid var(--border);}
+  .foot{margin-top:16px;color:var(--sec);font-size:11.5px;line-height:1.6;}
   @media (max-width:480px){
-    .hero{padding:32px 20px 78px;}
-    .hero h1{font-size:21px;}
-    .hero .sun{width:44px;height:44px;right:20px;top:18px;}
-    .flow .node{flex:1 1 45%;}
+    body{padding:16px 10px;}
+    h1{font-size:18px;}
+    .card{padding:13px 12px;}
+    .flow .node{flex:1 1 46%;}
     .flow .arrow{display:none;}
-    .sec-hint{margin-left:0;}
-    .bar{height:46px;}
   }
 </style>
 </head>
 <body>
-
-<div class="hero">
-  <svg class="stars" viewBox="0 0 400 200" preserveAspectRatio="none" aria-hidden="true">
-    <circle cx="40" cy="30" r="1.2" fill="#fff"/><circle cx="120" cy="18" r="1" fill="#fff"/>
-    <circle cx="210" cy="40" r="1.4" fill="#fff"/><circle cx="300" cy="22" r="1" fill="#fff"/>
-    <circle cx="360" cy="55" r="1.1" fill="#fff"/><circle cx="80" cy="70" r="1" fill="#fff"/>
-    <circle cx="260" cy="75" r="1.2" fill="#fff"/><circle cx="340" cy="95" r="1" fill="#fff"/>
-  </svg>
-  <div class="sun"></div>
-  <div class="wrap">
-    <span class="tagline">⛰️ 国庆 · 江西萍乡 · 自驾</span>
-    <h1>武功山 2 天 1 夜登山时间线</h1>
-    <p class="sub">2026-10-01 → 10-02 · 纯徒步 522 元/人 vs 索道 662 元/人 · 两套方案全程可切换</p>
-    <div class="chips">
-      <span class="chip"><b>10/1 天气</b> 阴有阵雨/雷雨 · 山顶 10–16℃</span>
-      <span class="chip"><b>10/2 天气</b> 小雨转阴 · 山顶 9–12℃</span>
-      <span class="chip"><b>日出</b> 10/2 约 06:17</span>
-      <span class="chip"><b>日落</b> 10/1 约 18:12</span>
-      <span class="chip"><b>索道旺季运营</b> 8:20–17:10</span>
-    </div>
-  </div>
-  <svg class="mountain" viewBox="0 0 1200 150" preserveAspectRatio="none" aria-hidden="true">
-    <path d="M0,150 L0,92 L130,34 L250,98 L420,20 L560,108 L760,36 L950,100 L1200,52 L1200,150 Z" fill="rgba(255,255,255,0.10)"/>
-    <path d="M0,150 L0,116 L170,62 L330,124 L510,58 L690,126 L900,82 L1200,128 L1200,150 Z" fill="rgba(255,255,255,0.08)"/>
-    <path d="M0,150 L220,96 L400,132 L600,74 L800,132 L1050,88 L1200,120 L1200,150 Z" fill="rgba(0,0,0,0.10)"/>
-  </svg>
-</div>
-
 <div class="wrap">
 
-  <!-- Day 1 -->
-  <section>
-    <div class="sec-head"><span class="sec-no">01</span><span class="sec-title">10 月 1 日 · 上山（前半程共用）</span></div>
-    <p class="sec-hint">出发 → 午餐 → 进山 → 开爬；午餐、门票、接驳为共用段，之后分两轨。</p>
+  <h1>武功山 2 天 1 夜登山时间线</h1>
+  <div class="sub">2026-10-01 ~ 10-02 · 自驾往返 · 纯徒步 522 元/人 vs 索道 662 元/人 · 两套方案全程可切换</div>
+  <div class="chips">
+    <span class="chip"><b>10/1 天气</b> 阴有阵雨/雷雨，山顶约 10–16℃</span>
+    <span class="chip"><b>10/2 天气</b> 小雨转阴，山顶约 9–12℃</span>
+    <span class="chip"><b>日出</b> 10/2 约 06:17（5:00 起床占位）</span>
+    <span class="chip"><b>日落</b> 10/1 约 18:12</span>
+    <span class="chip"><b>索道旺季运营</b> 8:20–17:10</span>
+  </div>
 
+  <div class="card">
+    <h2>⛰️ 10 月 1 日 · 上山（两方案共用前半程）</h2>
+    <div class="hint">9:00 出发 → 午餐 → 进山 → 开爬；午餐、门票、接驳为共用段，之后分两轨。</div>
     <div class="flow">
-      <div class="node"><span class="t">09:00</span><div class="d">中海珑悦府出发，自驾约 <b>2h25m</b>（油费约 60 元/人）</div></div>
+      <div class="node"><div class="t">09:00</div>中海珑悦府出发，自驾约 2h25m（油费约 60 元/人）</div>
       <div class="arrow">→</div>
-      <div class="node"><span class="t">11:25–12:30</span><div class="d">武功山附近吃午饭，<b>吃饱再上山</b></div></div>
+      <div class="node"><div class="t">11:25–12:30</div>武功山附近吃午饭（吃饱再上山）</div>
       <div class="arrow">→</div>
-      <div class="node"><span class="t">12:30–13:00</span><div class="d">线上购票 60–70 元，免费接驳车 <b>7 分钟</b>到石鼓寺</div></div>
+      <div class="node"><div class="t">12:30–13:00</div>线上购票 60–70 元，免费接驳车 7 分钟到石鼓寺</div>
       <div class="arrow">→</div>
-      <div class="node"><span class="t">13:00</span><div class="d">石鼓寺开爬（12:00–13:00 之间皆可）</div></div>
+      <div class="node"><div class="t">13:00 前后</div>石鼓寺开爬（12:00–13:00 之间皆可）</div>
     </div>
 
-    <div class="tracks">
+    <div class="tracks" style="margin-top:12px;">
       <div class="track t-hike">
         <div class="track-head"><span>🥾 纯徒步 · 约 7 小时</span><span class="tag">19:00 登顶</span></div>
         <div class="tl">
-          <div class="step"><span class="t">13:00 → 19:00</span><div class="d">石鼓寺 → 尽心桥 → <b>好汉坡</b> → 吊马桩 → 金顶；全程台阶+山路约 6000 级，雨天慢行</div></div>
-          <div class="step"><span class="t">19:00</span><div class="d">登顶金顶。<b>日落约 18:12，天黑后务必带头灯</b>；体力不支可在中庵改坐索道</div></div>
+          <div class="step"><span class="t">13:00</span>　<span class="d">石鼓寺 → 尽心桥 → 好汉坡 → 吊马桩 → 金顶，全程台阶+山路约 6000 级，雨天慢行</span></div>
+          <div class="step"><span class="t">19:00</span>　<span class="d">登顶金顶。<b>日落约 18:12，天黑后登顶务必带头灯</b>；体力不支可在中庵改坐索道</span></div>
         </div>
       </div>
       <div class="track t-cable">
         <div class="track-head"><span>🚡 索道 · 约 3 小时</span><span class="tag">16:00 登顶</span></div>
         <div class="tl">
-          <div class="step"><span class="t">13:00</span><div class="d">中庵索道上行 <b>65 元</b>（先购票、500 米内扫码取号）→ 中庵紫极宫</div></div>
-          <div class="step"><span class="t">13:30 → 16:00</span><div class="d">往观音寺方向 → 好汉坡 → 吊马桩 → 金顶。<b>索道不到金顶</b>，之后还有约 1.5–2 小时徒步</div></div>
+          <div class="step"><span class="t">13:00</span>　<span class="d">中庵索道上行 65 元（先购票、500 米内扫码取号）→ 中庵紫极宫</span></div>
+          <div class="step"><span class="t">13:30–16:00</span>　<span class="d">往观音寺方向 → 好汉坡 → 吊马桩 → 金顶。<b>索道不到金顶</b>，之后还有约 1.5–2 小时徒步</span></div>
         </div>
       </div>
     </div>
 
-    <div class="flow" style="margin-top:14px;">
-      <div class="node"><span class="t">登顶后</span><div class="d">回房间放东西（山顶住宿约 <b>192 元/人</b>）</div></div>
+    <div class="flow" style="margin-top:12px;">
+      <div class="node"><div class="t">登顶后</div>回房间放东西（山顶住宿约 192 元/人）</div>
       <div class="arrow">→</div>
-      <div class="node"><span class="t">吃东西</span><div class="d">山顶小卖部 / 自带自热锅、方便面</div></div>
+      <div class="node"><div class="t">吃东西</div>山顶小卖部 / 自带自热锅、方便面</div>
       <div class="arrow">→</div>
-      <div class="node"><span class="t">拍照出片</span><div class="d">金色草甸 + 云海；天晴时 <b>17:30–18:12</b> 蹲守日落</div></div>
+      <div class="node"><div class="t">拍照出片</div>金色草甸 + 云海；天晴时 17:30–18:12 蹲守日落</div>
       <div class="arrow">→</div>
-      <div class="node"><span class="t">晚上</span><div class="d">扑克牌、桌游、略带微醺酒；夜温约 <b>10℃ 以下</b>注意保暖</div></div>
+      <div class="node"><div class="t">晚上</div>扑克牌、桌游、略带微醺酒；夜温约 10℃ 以下注意保暖</div>
     </div>
-  </section>
+  </div>
 
-  <!-- Day 2 -->
-  <section>
-    <div class="sec-head"><span class="sec-no">02</span><span class="sec-title">10 月 2 日 · 下山（共用日出，之后分两轨）</span></div>
-    <p class="sec-hint">5:00 起床看日出 → 早餐 → 9:00 前退房；徒步比索道多约 2 小时山路，省 75 元索道钱。</p>
-
+  <div class="card">
+    <h2>🌅 10 月 2 日 · 下山（共用日出，之后分两轨）</h2>
+    <div class="hint">5:00 起床看日出 → 早餐 → 9:00 前退房；徒步比索道多约 2 小时山路，省 75 元索道钱。</div>
     <div class="flow">
-      <div class="node"><span class="t">05:00–06:40</span><div class="d">金顶看日出（<b>06:17</b>）；阴天日出可能被云遮，但云海一样出片</div></div>
+      <div class="node"><div class="t">05:00–06:40</div>金顶看日出（06:17）；阴天日出可能被云遮，但云海一样出片</div>
       <div class="arrow">→</div>
-      <div class="node"><span class="t">06:40–08:30</span><div class="d">简单早餐，收拾行李</div></div>
+      <div class="node"><div class="t">06:40–08:30</div>简单早餐，收拾行李</div>
       <div class="arrow">→</div>
-      <div class="node"><span class="t">09:00 前</span><div class="d">退房出发下山</div></div>
+      <div class="node"><div class="t">09:00 前</div>退房出发下山</div>
     </div>
-
-    <div class="tracks">
+    <div class="tracks" style="margin-top:12px;">
       <div class="track t-hike">
         <div class="track-head"><span>🥾 纯徒步下山 · 约 4 小时</span><span class="tag">17:30 到家</span></div>
         <div class="tl">
-          <div class="step"><span class="t">09:00 → 13:00</span><div class="d">金顶 → 吊马桩 → 好汉坡 → 石鼓寺 → 接驳车回游客中心；雨后石阶湿滑，穿<b>防水鞋套</b></div></div>
-          <div class="step"><span class="t">14:00</span><div class="d">吃午饭 → 自驾返程，<b>17:30 到家</b></div></div>
+          <div class="step"><span class="t">09:00–13:00</span>　<span class="d">金顶 → 吊马桩 → 好汉坡 → 石鼓寺 → 接驳车回游客中心（雨后石阶湿滑，穿防水鞋套）</span></div>
+          <div class="step"><span class="t">14:00</span>　<span class="d">吃午饭 → 自驾返程，17:30 到家</span></div>
         </div>
       </div>
       <div class="track t-cable">
         <div class="track-head"><span>🚡 索道下山 · 约 2 小时</span><span class="tag">15:30 到家</span></div>
         <div class="tl">
-          <div class="step"><span class="t">09:00 → 11:00</span><div class="d">金顶索道下行 <b>25 元</b> → 中庵索道下行 <b>50 元</b> → 游客中心（同样先购票再取号）</div></div>
-          <div class="step"><span class="t">12:00</span><div class="d">吃午饭 → 自驾返程，<b>15:30 到家</b></div></div>
+          <div class="step"><span class="t">09:00–11:00</span>　<span class="d">金顶索道下行 25 元 → 中庵索道下行 50 元 → 游客中心（同样先购票再取号）</span></div>
+          <div class="step"><span class="t">12:00</span>　<span class="d">吃午饭 → 自驾返程，15:30 到家</span></div>
         </div>
       </div>
     </div>
-    <div class="tip tip-y"><span class="ic">⚠️</span><span><b>索道旺季运营 8:20–17:10</b>，错过末班只能徒步下山；早高峰下山人多，金顶索道也要取号。</span></div>
-  </section>
+    <div class="tip tip-y"><span class="ic">⚠️</span><span>索道旺季运营 8:20–17:10，错过末班只能徒步下山；早高峰下山人多，金顶索道也要取号。</span></div>
+  </div>
 
-  <!-- 费用 -->
-  <section>
-    <div class="sec-head"><span class="sec-no">03</span><span class="sec-title">人均账本对比</span></div>
-    <p class="sec-hint">差额 140 元全部来自索道（上行中庵 65 + 下行金顶 25 + 下行中庵 50）；门票线上提前购 60 元可再省 10 元。</p>
-
-    <div class="cost-grid">
-      <div class="cost-card hike">
-        <span class="badge">无索道</span>
-        <div class="cap">🥾 纯徒步 · 人均</div>
-        <div class="num">522 元</div>
-        <div class="sub-note">多 4 小时山路 · 17:30 到家</div>
-      </div>
-      <div class="cost-card cable">
-        <span class="badge">含全程索道</span>
-        <div class="cap">🚡 索道 · 人均</div>
-        <div class="num">662 元</div>
-        <div class="sub-note">省 4 小时 · 15:30 到家 · 山顶多玩 3 小时</div>
-      </div>
+  <div class="card">
+    <h2>💰 人均账本对比</h2>
+    <div class="hint">差额 140 元全部来自索道：上行中庵 65 + 下行金顶 25 + 下行中庵 50。门票线上提前购 60 元可再省 10 元。</div>
+    <div class="total-row">
+      <div class="total-box box-hike"><div class="cap">纯徒步 · 人均</div><div class="num">522 元</div></div>
+      <div class="total-box box-cable"><div class="cap">索道 · 人均</div><div class="num">662 元</div></div>
     </div>
-
-    <div class="bar-box">
-      <div class="bar-cap">纯徒步 522 元 <span class="sum">门票 70 + 油费 60 + 住宿 192 + 吃饭 100 + 灵活 100</span></div>
-      <div class="bar">
-        <div class="seg" style="width:13.4%;background:#2563A8;"><span class="v">70</span><span class="l">门票</span></div>
-        <div class="seg" style="width:11.5%;background:#3E7BBD;"><span class="v">60</span><span class="l">油费</span></div>
-        <div class="seg" style="width:36.8%;background:#6C95C4;"><span class="v">192</span><span class="l">住宿</span></div>
-        <div class="seg" style="width:19.2%;background:#9DB7D4;"><span class="v">100</span><span class="l">吃饭</span></div>
-        <div class="seg" style="width:19.2%;background:#BCCBE0;"><span class="v">100</span><span class="l">灵活</span></div>
-      </div>
-      <div class="bar-cap" style="margin-top:14px;">索道 662 元 <span class="sum">多出索道 140 元</span></div>
-      <div class="bar">
-        <div class="seg" style="width:10.6%;background:#2E7D5B;"><span class="v">70</span><span class="l">门票</span></div>
-        <div class="seg" style="width:9.1%;background:#4C9A75;"><span class="v">60</span><span class="l">油费</span></div>
-        <div class="seg" style="width:21.1%;background:#E0A63E;color:#5C3A07;"><span class="v">140</span><span class="l">索道</span></div>
-        <div class="seg" style="width:29%;background:#5EA87F;"><span class="v">192</span><span class="l">住宿</span></div>
-        <div class="seg" style="width:15.1%;background:#8CC4A5;"><span class="v">100</span><span class="l">吃饭</span></div>
-        <div class="seg" style="width:15.1%;background:#B0D6C1;"><span class="v">100</span><span class="l">灵活</span></div>
-      </div>
-      <div class="legend">
-        <span class="li"><span class="sw" style="background:#2563A8;"></span>门票 70（实查，线上 60）</span>
-        <span class="li"><span class="sw" style="background:#3E7BBD;"></span>油费 60（估算，约 300km）</span>
-        <span class="li"><span class="sw" style="background:#E0A63E;"></span>索道 140（实查，2026 官方价）</span>
-        <span class="li"><span class="sw" style="background:#6C95C4;"></span>住宿 192（参考）</span>
-        <span class="li"><span class="sw" style="background:#9DB7D4;"></span>吃饭 100（估算）</span>
-        <span class="li"><span class="sw" style="background:#BCCBE0;"></span>灵活 100（估算）</span>
-      </div>
-      <div class="note" style="margin-top:10px;font-size:12px;color:var(--sec);">优惠：学生 / 60–64 岁老人 50 元，1.2 米以下儿童、65 岁以上免大门票（带证件原件）。</div>
+    <div class="bar-cap">纯徒步 522 元（无索道）</div>
+    <div class="bar">
+      <div class="seg" style="width:13.4%;background:#2B6CB0;">门票<small> 70</small></div>
+      <div class="seg" style="width:11.5%;background:#4A7FB8;">油费<small> 60</small></div>
+      <div class="seg" style="width:36.8%;background:#7C94B8;">住宿<small> 192</small></div>
+      <div class="seg" style="width:19.2%;background:#9DB3CC;">吃饭<small> 100</small></div>
+      <div class="seg" style="width:19.2%;background:#B9C7D8;">灵活<small> 100</small></div>
     </div>
-  </section>
-
-  <!-- 提醒 -->
-  <section>
-    <div class="sec-head"><span class="sec-no">04</span><span class="sec-title">三个关键提醒</span></div>
-    <div class="tips-grid">
-      <div class="tip-card"><span class="ic">🎫</span><h3>先购票、后取号</h3>
-        <p>国庆索道排队严重，距索道站约 <b>500 米内扫码/终端取号</b>，凭号进站，单账号单次取号，取号后可在附近休息。</p></div>
-      <div class="tip-card"><span class="ic">🌧️</span><h3>雨天防滑保暖</h3>
-        <p>雨衣、防水鞋套、四只塑料袋（套袜子外）必备；山顶体感 <b>10℃ 上下</b>，冲锋衣+保温内胆；雨后低温反而<b>云海概率高</b>。</p></div>
-      <div class="tip-card"><span class="ic">🔦</span><h3>天黑登顶</h3>
-        <p>纯徒步 19:00 才到金顶，日落 18:12 后山路无照明，补带 <b>头灯/手电</b>；13:00 后才开爬或体力不足，建议在中庵改坐索道。</p></div>
+    <div class="bar-cap">索道 662 元（+140 索道）</div>
+    <div class="bar">
+      <div class="seg" style="width:10.6%;background:#2F855A;">门票<small> 70</small></div>
+      <div class="seg" style="width:9.1%;background:#3E9466;">油费<small> 60</small></div>
+      <div class="seg" style="width:21.1%;background:#F0A73A;color:#5C3A07;">索道<small> 140</small></div>
+      <div class="seg" style="width:29%;background:#5EAD87;">住宿<small> 192</small></div>
+      <div class="seg" style="width:15.1%;background:#8DC4A8;">吃饭<small> 100</small></div>
+      <div class="seg" style="width:15.1%;background:#AFD5C2;">灵活<small> 100</small></div>
     </div>
-  </section>
+    <div class="legend">
+      <span class="li"><span class="sw" style="background:#2B6CB0;"></span>门票 70（实查，线上 60）</span>
+      <span class="li"><span class="sw" style="background:#4A7FB8;"></span>油费 60（估算，约 300km）</span>
+      <span class="li"><span class="sw" style="background:#F0A73A;"></span>索道 140（实查，2026 官方价）</span>
+      <span class="li"><span class="sw" style="background:#7C94B8;"></span>住宿 192（参考）</span>
+      <span class="li"><span class="sw" style="background:#9DB3CC;"></span>吃饭 100（估算）</span>
+      <span class="li"><span class="sw" style="background:#B9C7D8;"></span>灵活 100（估算）</span>
+    </div>
+    <div class="note">优惠：学生 / 60–64 岁老人 50 元，1.2 米以下儿童、65 岁以上免大门票（带证件原件）；线上提前 1 天购票 60 元。</div>
+  </div>
+
+  <div class="card">
+    <h2>🧳 三个关键提醒</h2>
+    <div class="tip tip-y"><span class="ic">🎫</span><span><b>先购票、后取号：</b>国庆索道排队严重，距索道站约 500 米内扫码/终端取号，凭号进站，单账号单次取号，取号后可在附近休息。</span></div>
+    <div class="tip tip-g"><span class="ic">🌧️</span><span><b>雨天防滑保暖：</b>雨衣、防水鞋套、四只塑料袋（套袜子外）必备；山顶体感 10℃ 上下，冲锋衣+保温内胆；雨后低温反而云海概率高。</span></div>
+    <div class="tip tip-gr"><span class="ic">🔦</span><span><b>天黑登顶：</b>纯徒步 19:00 才到金顶，日落 18:12 后山路无照明，补带<b>头灯/手电</b>；13:00 后才开爬或体力不足，建议在中庵改坐索道。</span></div>
+  </div>
 
   <div class="foot">
-    数据口径：门票、索道价格与运营时间、日出日落、天气为实查（武功山官方 / 中央气象台 / 中国天气网，9 月 30 日查询）；住宿为参考价；油费、吃饭、灵活费用为估算。出发前 48 小时请复查天气、官方预约与索道公告。
+    数据口径：门票、索道价格与运营时间、日出日落、天气为实查（武功山官方/中央气象台/中国天气网，9 月 30 日查询）；住宿为参考价；油费、吃饭、灵活费用为估算。出发前 48 小时请复查天气、官方预约与索道公告。
   </div>
 
 </div>
